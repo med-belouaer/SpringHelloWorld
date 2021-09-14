@@ -1,34 +1,32 @@
-pipeline {
-    agent any
+node {
 
-    stages {
         stage('Clone') {
-            sh 'git clone https://github.com/med-belouaer/SpringHelloWorld.git'
+            git ' https://github.com/med-belouaer/SpringHelloWorld.git'
           }
       
         stage('Build') {
-            steps {
-                sh 'mvn clean install'
-            }
+            
+                sh 'mvn install test package'
+            
         }
         stage('Test') {
-            steps {
+            
                 sh 'mvn test' 
-            }
+            
         }
         stage('Package') {
-            steps {
+            
                 sh 'mvn package'
                 sh 'docker build -t testspring:1 .'
-            }
+            
         }
         stage('Deploy') {
-            steps {
+         
               sh 'kubectl get pod'
               sh 'kubectl apply -f deployment.yaml'
               sh 'kubectl get pod'
-            }
+            
         }
-    }
+    
 }
 
