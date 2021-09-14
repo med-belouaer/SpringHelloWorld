@@ -1,7 +1,7 @@
 node {
 
         stage('Clone') {
-            git ' https://github.com/med-belouaer/SpringHelloWorld.git'
+            git 'https://github.com/med-belouaer/SpringHelloWorld.git'
           }
       
         stage('Build') {
@@ -9,14 +9,10 @@ node {
                 sh 'mvn install test package'
             
         }
-        stage('Test') {
-            
-                sh 'mvn test' 
-            
-        }
+
         stage('Package') {
             
-                sh 'mvn package'
+                
                 sh 'docker build -t testspring:1 .'
             
         }
