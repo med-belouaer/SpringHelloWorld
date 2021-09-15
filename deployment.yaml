@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: test-spring
-        image: medbelouaer/testspring
+        image: medbelouaer/testspring:1
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
